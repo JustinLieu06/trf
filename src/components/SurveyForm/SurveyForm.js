@@ -3,7 +3,7 @@ import axios from 'axios';
 import jsonp from 'jsonp';
 
 import Aux from '../../hoc/Aux';
-import Survey from '../../components/Survey/Survey.js';
+import Survey from '../Survey/Survey.js';
 
 const SurveyForm = () => {
 
