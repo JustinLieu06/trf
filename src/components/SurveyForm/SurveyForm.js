@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import axios from 'axios';
 import jsonp from 'jsonp';
+import $ from 'jquery';
 
 import Aux from '../../hoc/Aux';
 import Survey from '../Survey/Survey.js';
@@ -64,23 +65,23 @@ const SurveyForm = () => {
     //   console.log(err);
     // });
 
-    fetch(testapi3, {
-      method: "POST",
-      headers: {
-        'api_token': api_token,
-        'user_identifier': user_identifier,
-      },
-      body: JSON.stringify(payload),
-      cors: true,
-      credentials: 'same-origin',
-    })
-    .then(response => {
-      console.log(response);
-      response.json();
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    // fetch(testapi3, {
+    //   method: "POST",
+    //   headers: {
+    //     'api_token': api_token,
+    //     'user_identifier': user_identifier,
+    //   },
+    //   body: JSON.stringify(payload),
+    //   cors: true,
+    //   credentials: 'same-origin',
+    // })
+    // .then(response => {
+    //   console.log(response);
+    //   response.json();
+    // })
+    // .catch(err => {
+    //   console.log(err);
+    // });
 
     // const callbackScript = document.createElement("script");
     // callbackScript.type = 'text/json';
@@ -94,6 +95,28 @@ const SurveyForm = () => {
     // document.body.appendChild(callbackScript);
     // document.body.appendChild(jsonpScript);
 
+    var cb = function(data){
+      console.log(data);
+    }
+
+    $.ajax({
+      url: api,
+      jsonp: cb,
+      dataType: "jsonp",
+      data: {
+        api_token: api_token,
+        user_identifier: user_identifier,
+      },
+      // data: JSON.stringify(payload),
+      success: function (data, status){
+        console.log(status);
+      },
+      error: function (xOptions, textStatus){
+        console.log(textStatus);
+      },
+    }).done(function(data) {
+      console.log("Request received: " + data);
+    });
   }
 
   return (
